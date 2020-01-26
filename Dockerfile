@@ -10,4 +10,5 @@ RUN         pip install -r requirements.txt
 RUN         mkdir /project
 COPY        django /project/
 WORKDIR     /project
-CMD         gunicorn webfin.wsgi -w 2 -b :$PORT --reload
+#CMD         gunicorn webfin.wsgi -w 2 -b :$PORT --reload
+CMD         gunicorn webfin.wsgi 
