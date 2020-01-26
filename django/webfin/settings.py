@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-from webfin.secret import DATABASES
+#from webfin.secret import DATABASES
+from webfin.hdatabase import DATABASES
 
 import os
 
@@ -21,12 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6^ko%!c*_(n5yj=b67t4f90o^e)=pbl66hkm5844v%3i&=zn3a'
+#SECRET_KEY = '6^ko%!c*_(n5yj=b67t4f90o^e)=pbl66hkm5844v%3i&=zn3a'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shrouded-plateau-51308.herokuapp.com']
+
 
 
 # Application definition
