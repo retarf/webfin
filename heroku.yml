@@ -2,4 +2,7 @@ build:
     docker:
         web: Dockerfile
 run:
-    web: gunicorn webfin.wsgi -w 2 -b :8000 --reload
+    #web: gunicorn webfin.wsgi -w 2 -b :$PORT --reload
+    web: gunicorn webfin.wsgi -b :$PORT --reload
+release:
+    image: web
