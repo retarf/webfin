@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-# from webfin.secret import DATABASES
+#from webfin.secret import DATABASES
 from webfin.hdatabase import DATABASES
 
 import os
@@ -26,8 +26,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = int(os.environ.get('DEBUG', default=0))
+DEBUG = True
+#DEBUG = int(os.environ.get('DEBUG', default=0))
+#DEBUG = int(os.environ.get('DEBUG', default=0))
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shrouded-plateau-51308.herokuapp.com']
 
