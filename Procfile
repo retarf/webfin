@@ -1,1 +1,1 @@
-web: gunicorn webfin.wsgi -w 1 -b :$PORT --reload
+web: python manage.py runserver $PORT

@@ -2,6 +2,7 @@ build:
     docker:
         web: Dockerfile
 run:
-    web: gunicorn webfin.wsgi -w 1 -b :$PORT --reload
+    #web: gunicorn webfin.wsgi -w 1 -b :$PORT --reload
+    web: python manage.py runserver $PORT
 release:
     image: web
