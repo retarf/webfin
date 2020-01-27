@@ -5,8 +5,8 @@ from .api import EntryViewSet
 namespace = 'entry'
 
 entry_router = DefaultRouter()
-entry_router.register('entrys', EntryViewSet)
+entry_router.register('entries', EntryViewSet)
 
 urlpatterns = [
-    path('', include(entry_router.urls), name='entrys'),
+    path('', include(entry_router.urls), name='entries'),
 ]
