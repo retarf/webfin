@@ -7,6 +7,7 @@ RUN         apt update \
 RUN         apt install -y apt-utils python3-setuptools vim
 RUN         pip install --upgrade pip
 RUN         pip install -r requirements.txt
+RUN         python -m pip install --upgrade pip
 RUN         mkdir /project
 COPY        django /project/
 WORKDIR     /project

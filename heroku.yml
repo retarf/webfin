@@ -3,6 +3,4 @@ build:
         web: Dockerfile
 run:
     #web: gunicorn webfin.wsgi -w 1 -b :$PORT --reload
-    web: python manage.py runserver 0.0.0.0:$PORT
-release:
-    image: web
+    web: python manage.py runserver 

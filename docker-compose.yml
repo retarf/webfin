@@ -11,8 +11,9 @@ services:
             - "80:8000"
               #command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 webshop.wsgi"
               #command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-              #command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-        command: /usr/local/bin/gunicorn webfin.wsgi -w 2 -b :8000 --reload
+        command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+              #command: /usr/local/bin/gunicorn webfin.wsgi -w 2 -b :8000 --reload
+              #command: gunicorn webfin.wsgi 
 
     db:
         image: postgres
