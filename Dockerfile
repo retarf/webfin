@@ -13,4 +13,5 @@ COPY        django /project/
 WORKDIR     /project
 #CMD         gunicorn webfin.wsgi -w 1 -b :$PORT --reload
 #CMD         gunicorn webfin.wsgi 
+#CMD         python manage.py runserver $PORT
 CMD         python manage.py runserver $PORT
