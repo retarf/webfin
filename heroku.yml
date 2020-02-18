@@ -1,6 +1,0 @@
-build:
-    docker:
-        web: Dockerfile
-        # run:
-        #     #web: gunicorn webfin.wsgi -w 1 -b :$PORT --reload
-        #     web: python manage.py runserver 

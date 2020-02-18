@@ -1,16 +1,30 @@
-version: '3'
+version: '3.2'
 
 services:
-    web:
+    frontend:
+        depends_on:
+            - backend
+        build: ./frontend
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+        ports:
+            - "80:3000"
+        environment:
+            - NODE_ENV=development
+        command: npm start
+    backend:
         depends_on:
             - db
-        build: .
+        build: ./backend
         volumes: 
-            - ./django:/project
+            - ./backend:/app/backend
         ports:
-            - "80:8000"
+            - "8000:8000"
               #command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 webshop.wsgi"
               #command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        stdin_open: true
+        tty: true
         command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
               #command: /usr/local/bin/gunicorn webfin.wsgi -w 2 -b :8000 --reload
               #command: gunicorn webfin.wsgi 
