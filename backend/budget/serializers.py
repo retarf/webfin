@@ -7,3 +7,4 @@ class EntrySerializer(serializers.ModelSerializer):
         model = Entry
         fields = '__all__'
     month = serializers.DateField(format='%Y-%m')
+    value = serializers.FloatField()

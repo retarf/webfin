@@ -15,6 +15,15 @@ class Entries extends Component {
         })
     };
 
+    get_sum() {
+        let total = 0;
+        let entries = this.state.entries;
+        for (let i = 0; i < entries.length; i++) {
+            total += entries[i].value;
+        }
+        return total.toFixed(2);
+    };
+
 
   render() {
       return (
@@ -36,6 +45,7 @@ class Entries extends Component {
                     <td>{entry.value}</td>
                 </tr>
             )}
+                <tr><td colSpan="3">SUMA:</td><td>{this.get_sum()}</td></tr>
             </tbody>
         </Table>
         )
