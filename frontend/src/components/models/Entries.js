@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 
 class Entries extends Component {
     state = {
-        entries: []
+        entries: [],
+        entry: '',
     };
 
     componentDidMount() { 
@@ -22,6 +23,10 @@ class Entries extends Component {
             total += entries[i].value;
         }
         return total.toFixed(2);
+    };
+
+    handleChange = event => {
+        this.setState({ entry: event.target.value });
     };
 
 
