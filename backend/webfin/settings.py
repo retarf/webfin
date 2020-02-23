@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'still-oasis-15353.herokuapp.com']
 
 
 
+
 # Application definition
 
 INSTALLED_APPS = [

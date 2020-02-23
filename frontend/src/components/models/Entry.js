@@ -11,28 +11,45 @@ class Entry extends Component {
     };
 
     handleChange = event => {
-        this.setState({ entry: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     };
 
+    handleSubmit = event => {
+        event.preventDefault();
 
-  render() {
+        const entry = {
+            month: this.state.month,
+            name: this.state.name,
+            description: this.state.description,
+            value: parseFloat(this.state.value),
+        };
+
+        axios.post('/budget/entries.json', entry)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+
+    };
+
+    render() {
       return (
-        <Form>
-            <Form.Group contrilId="">
+        <Form onSubmit={ this.handleSubmit } >
+            <Form.Group>
                 <Form.Label>Month:</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text" name="month" onChange={ this.handleChange} />
             </Form.Group>
-            <Form.Group contrilId="">
+            <Form.Group >
                 <Form.Label>Name:</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text" name="name" onChange={ this.handleChange} />
             </Form.Group>
-            <Form.Group contrilId="">
+            <Form.Group >
                 <Form.Label>Description:</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text" name="description" onChange={ this.handleChange} />
             </Form.Group>
-            <Form.Group contrilId="">
+            <Form.Group >
                 <Form.Label>Value:</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text" name="value" onChange={ this.handleChange} />
             </Form.Group>
             <Button variant="primary" type="submit">
                 Submit

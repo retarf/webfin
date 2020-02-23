@@ -6,6 +6,6 @@ class Entry(models.Model):
     month = models.DateField()
     name = models.CharField(max_length=200)
     description = models.TextField()
-    value = models.DecimalField(max_digits=2,decimal_places=2)
+    value = models.DecimalField(max_digits=8,decimal_places=2)
 
 

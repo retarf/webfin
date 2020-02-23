@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table, Form } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 class Entries extends Component {
     state = {
         entries: [],
-        entry: '',
     };
 
     componentDidMount() { 
