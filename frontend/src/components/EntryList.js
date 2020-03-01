@@ -2,32 +2,25 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
 
-class Entries extends Component {
+class EntryList extends Component {
     state = {
-        entries: [],
+        list: [],
     };
 
-    componentDidMount() { 
-      axios
-        .get('/budget/entries.json').then(res => {
-            const entries = res.data;
-            this.setState({ entries });
-        })
+    componentDidMount() {
+        const data = this.props.entries;
+        this.setState({ list: data });
+        console.log(this);
     };
 
-    get_sum() {
+    getSum() {
         let total = 0;
-        let entries = this.state.entries;
+        let entries = this.props.entries;
         for (let i = 0; i < entries.length; i++) {
             total += entries[i].value;
         }
         return total.toFixed(2);
     };
-
-    handleChange = event => {
-        this.setState({ entry: event.target.value });
-    };
-
 
   render() {
       return (
@@ -41,7 +34,7 @@ class Entries extends Component {
                 </tr>
             </thead>
             <tbody>
-            { this.state.entries.map(entry => 
+            { this.props.entries.map(entry => 
                 <tr>
                     <td>{entry.month}</td>
                     <td>{entry.name}</td>
@@ -49,11 +42,11 @@ class Entries extends Component {
                     <td>{entry.value}</td>
                 </tr>
             )}
-                <tr><td colSpan="3">SUMA:</td><td>{this.get_sum()}</td></tr>
+                <tr><td colSpan="3">SUMA:</td><td>{this.getSum()}</td></tr>
             </tbody>
         </Table>
         )
     };
 }
 
-export default Entries;
+export default EntryList;

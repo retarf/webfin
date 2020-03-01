@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+// import Entries from './Entries.js';
 
-class Entry extends Component {
-    state = {
-        month: '',
-        name: '',
-        description: '',
-        value: '',
+class EntryForm extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            month: '',
+            name: '',
+            description: '',
+            value: '',
+        };
+        this.emptyState = this.state;
     };
 
     handleChange = event => {
@@ -30,26 +36,33 @@ class Entry extends Component {
                 console.log(res.data);
             })
 
+        this.props.addEntry(entry);
+        this.resetForm();
+
+    };
+
+    resetForm = () => {
+        document.getElementById("EntryForm").reset();
     };
 
     render() {
       return (
-        <Form onSubmit={ this.handleSubmit } >
+        <Form id="EntryForm" onSubmit={ this.handleSubmit } >
             <Form.Group>
                 <Form.Label>Month:</Form.Label>
-                <Form.Control type="text" name="month" onChange={ this.handleChange} />
+                <Form.Control type="text" name="month" onChange={ this.handleChange } />
             </Form.Group>
             <Form.Group >
                 <Form.Label>Name:</Form.Label>
-                <Form.Control type="text" name="name" onChange={ this.handleChange} />
+                <Form.Control type="text" name="name" onChange={ this.handleChange } />
             </Form.Group>
             <Form.Group >
                 <Form.Label>Description:</Form.Label>
-                <Form.Control type="text" name="description" onChange={ this.handleChange} />
+                <Form.Control type="text" name="description" onChange={ this.handleChange } />
             </Form.Group>
             <Form.Group >
                 <Form.Label>Value:</Form.Label>
-                <Form.Control type="text" name="value" onChange={ this.handleChange} />
+                <Form.Control type="text" name="value" onChange={ this.handleChange } />
             </Form.Group>
             <Button variant="primary" type="submit">
                 Submit
@@ -59,4 +72,4 @@ class Entry extends Component {
     };
 }
 
-export default Entry;
+export default EntryForm;

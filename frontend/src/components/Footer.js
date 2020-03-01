@@ -6,7 +6,6 @@ class Footer extends Component {
         return (
             <div> 
                 Footer
-                <Button variant="primary">Primary</Button>
             </div>
         );
     }
