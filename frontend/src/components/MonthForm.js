@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Form, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 class MonthForm extends Component {
@@ -10,15 +9,6 @@ class MonthForm extends Component {
         };
     };
 
-    convertToDate() {
-        let day = "-01";
-        let date = this.state.month.concat(day);
-        return date;
-    };
-
-    setDate = arg => {
-
-    };
     handleChange = event => {
         this.setState({ month: event.target.value }); 
     };
@@ -26,7 +16,7 @@ class MonthForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const month = this.convertToDate(this.state.month);
+        const month = this.state.month;
         this.props.setMonth(month)
         this.resetForm()
     };

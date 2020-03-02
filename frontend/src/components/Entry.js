@@ -11,14 +11,31 @@ class Entry extends Component {
         super();
         this.state = {
             list: [],
+            month: '',
         }
     };
 
     componentDidMount() { 
-      axios
-        .get('/budget/entries.json').then(res => {
-            const entryList = res.data;
-            this.setState({ list: entryList });
+    };
+
+    getData = month => {
+        let baseUrl = '/budget/entries.json';
+        let url = '';
+        if (month === '') {
+            url = baseUrl;
+        } 
+        else
+        {
+            let filter = '?month=' + month;
+            url = baseUrl.concat(filter);
+        };
+
+        console.log(url);
+
+        axios
+            .get(url).then(res => {
+                const entryList = res.data;
+                this.setState({ list: entryList });
         });
     };
 
@@ -28,8 +45,9 @@ class Entry extends Component {
         this.setState({ list: list });
     };
 
-    setMonth = res => {
-        console.log(res);
+    setMonth = month => {
+        this.getData(month);
+        console.log(month);
     };
 
     render() {
@@ -37,7 +55,10 @@ class Entry extends Component {
             <Container>
                 <MonthForm setMonth = { this.setMonth } />
                 <Row>
-                    <Col xs={5}><EntryList entries = { this.state.list } /></Col>
+                    <Col xs={5}><EntryList 
+                        entries = { this.state.list } 
+                        month = { this.state.month }
+                    /></Col>
                     <Col xs={5}><EntryForm addEntry = { this.addEntry } /></Col>
                 </Row>
             </Container>
