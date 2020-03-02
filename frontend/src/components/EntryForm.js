@@ -13,7 +13,6 @@ class EntryForm extends Component {
             description: '',
             value: '',
         };
-        this.emptyState = this.state;
     };
 
     handleChange = event => {

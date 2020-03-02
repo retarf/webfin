@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import EntryList from './EntryList.js';
 import EntryForm from './EntryForm.js';
+import MonthForm from './MonthForm.js';
 
 class Entry extends Component { 
 
@@ -27,14 +28,18 @@ class Entry extends Component {
         this.setState({ list: list });
     };
 
+    setMonth = res => {
+        console.log(res);
+    };
 
     render() {
         return (
             <Container>
-              <Row>
-                <Col xs={5}><EntryList entries = { this.state.list } /></Col>
-                <Col xs={5}><EntryForm addEntry = { this.addEntry } /></Col>
-              </Row>
+                <MonthForm setMonth = { this.setMonth } />
+                <Row>
+                    <Col xs={5}><EntryList entries = { this.state.list } /></Col>
+                    <Col xs={5}><EntryForm addEntry = { this.addEntry } /></Col>
+                </Row>
             </Container>
         )};
 
