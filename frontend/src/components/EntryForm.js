@@ -8,7 +8,6 @@ class EntryForm extends Component {
     constructor() {
         super();
         this.state = {
-            month: '',
             name: '',
             description: '',
             value: '',
@@ -23,7 +22,7 @@ class EntryForm extends Component {
         event.preventDefault();
 
         const entry = {
-            month: this.state.month,
+            month: this.props.month,
             name: this.state.name,
             description: this.state.description,
             value: parseFloat(this.state.value),
@@ -47,10 +46,6 @@ class EntryForm extends Component {
     render() {
       return (
         <Form id="EntryForm" onSubmit={ this.handleSubmit } >
-            <Form.Group>
-                <Form.Label>Month:</Form.Label>
-                <Form.Control type="text" name="month" onChange={ this.handleChange } />
-            </Form.Group>
             <Form.Group >
                 <Form.Label>Name:</Form.Label>
                 <Form.Control type="text" name="name" onChange={ this.handleChange } />

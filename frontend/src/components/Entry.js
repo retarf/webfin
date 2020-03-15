@@ -30,8 +30,6 @@ class Entry extends Component {
             url = baseUrl.concat(filter);
         };
 
-        console.log(url);
-
         axios
             .get(url).then(res => {
                 const entryList = res.data;
@@ -47,7 +45,7 @@ class Entry extends Component {
 
     setMonth = month => {
         this.getData(month);
-        console.log(month);
+        this.setState({ month: month });
     };
 
     render() {
@@ -57,9 +55,11 @@ class Entry extends Component {
                 <Row>
                     <Col xs={5}><EntryList 
                         entries = { this.state.list } 
+                    /></Col>
+                    <Col xs={5}><EntryForm 
+                        addEntry = { this.addEntry } 
                         month = { this.state.month }
                     /></Col>
-                    <Col xs={5}><EntryForm addEntry = { this.addEntry } /></Col>
                 </Row>
             </Container>
         )};
