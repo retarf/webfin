@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import { Modal, Form, Button } from 'react-bootstrap';
 // import Entries from './Entries.js';
 
 class EntryForm extends Component {
@@ -44,24 +44,31 @@ class EntryForm extends Component {
     };
 
     render() {
-      return (
-        <Form id="EntryForm" onSubmit={ this.handleSubmit } >
-            <Form.Group >
-                <Form.Label>Name:</Form.Label>
-                <Form.Control type="text" name="name" onChange={ this.handleChange } />
-            </Form.Group>
-            <Form.Group >
-                <Form.Label>Description:</Form.Label>
-                <Form.Control type="text" name="description" onChange={ this.handleChange } />
-            </Form.Group>
-            <Form.Group >
-                <Form.Label>Value:</Form.Label>
-                <Form.Control type="text" name="value" onChange={ this.handleChange } />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+        return (
+            <Modal
+                ///{props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Form id="EntryForm" onSubmit={ this.handleSubmit } >
+                    <Form.Group >
+                        <Form.Label>Name:</Form.Label>
+                        <Form.Control type="text" name="name" onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>Description:</Form.Label>
+                        <Form.Control type="text" name="description" onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>Value:</Form.Label>
+                        <Form.Control type="text" name="value" onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            </Modal >
         )
     };
 }

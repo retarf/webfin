@@ -27,21 +27,16 @@ class MonthForm extends Component {
 
     render() {
         return (
-            <Form id="MonthForm" onSubmit={ this.handleSubmit } >
-                <InputGroup className="mb-3">
-                    <FormControl type="text" name="month" onChange={ this.handleChange }
-                        placeholder="Month: RRRR-MM"
-                        aria-label="Month"
-                        aria-describedby="Month"
-                    />
-                    <InputGroup.Append>
-                        <Button variant="outline-primary" type="submit" >Search</Button>
-                    </InputGroup.Append>
-                </InputGroup>
+            <Form inline id="MonthForm" onSubmit={ this.handleSubmit } >
+                <FormControl className="mr-sm-2" type="text" name="month" onChange={ this.handleChange }
+                    placeholder="Month: RRRR-MM"
+                    aria-label="Month"
+                    aria-describedby="Month"
+                />
+                <Button variant="outline-primary" type="submit" >Search</Button>
             </Form>
         );
     };
-
 };
 
 export default MonthForm;

@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import Content from './Content.js';
 import Header from './Header.js';
 import Footer from './Footer.js';
-import { Jumbotron } from 'react-bootstrap';
+import { Container, Jumbotron } from 'react-bootstrap';
+import MainMenu from './MainMenu.js';
 
 class Main extends Component {
     render() {
+                //<Header />
         return (
-            <Jumbotron fluid>
-                <Header />
-                <Content />
+            <div>
+                <MainMenu />
+                <Jumbotron fluid>
+                    <Content />
+                </Jumbotron>
                 <Footer />
-            </Jumbotron>
+            </div>
         );
     }
 }

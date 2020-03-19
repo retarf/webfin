@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import Entry from './Entry.js';
-import { Container, Row, Col } from 'react-bootstrap'
+import EntryMenu from './EntryMenu.js';
+import { Container, Row, Col } from 'react-bootstrap';
 
 class Content extends Component {
 
 
+            ///<Container>
+            ///</Container>
     render() {
         return (
-            <Container>
               <Row>
-                <Col xs={1}>1 of 2</Col>
-                <Col xs={10}><Entry /></Col>
+                <Col lg={2}><EntryMenu /></Col>
+                <Col lg={9}><Entry /></Col>
               </Row>
-            </Container>
         );
     }
 }

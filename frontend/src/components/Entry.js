@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
 import EntryList from './EntryList.js';
 import EntryForm from './EntryForm.js';
 import MonthForm from './MonthForm.js';
@@ -48,20 +48,22 @@ class Entry extends Component {
         this.setState({ month: month });
     };
 
+//                <MonthForm setMonth = { this.setMonth } />
     render() {
         return (
-            <Container>
-                <MonthForm setMonth = { this.setMonth } />
-                <Row>
-                    <Col xs={5}><EntryList 
-                        entries = { this.state.list } 
-                    /></Col>
-                    <Col xs={5}><EntryForm 
-                        addEntry = { this.addEntry } 
-                        month = { this.state.month }
-                    /></Col>
-                </Row>
-            </Container>
+            <Jumbotron fluid>
+                <Container>
+                    <Row>
+                        <Col lg={5}><EntryList 
+                            entries = { this.state.list } 
+                        /></Col>
+                        <Col lg={5}><EntryForm 
+                            addEntry = { this.addEntry } 
+                            month = { this.state.month }
+                        /></Col>
+                    </Row>
+                </Container>
+            </Jumbotron>
         )};
 
 }
