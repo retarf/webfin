@@ -17,8 +17,8 @@ class MonthForm extends Component {
         event.preventDefault();
 
         const month = this.state.month;
-        this.props.setMonth(month)
-        this.resetForm()
+        this.props.setMonth(month);
+        this.resetForm();
     };
 
     resetForm = () => {

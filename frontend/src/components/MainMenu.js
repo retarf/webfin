@@ -6,8 +6,8 @@ import MonthForm from './MonthForm.js';
 
 class MainMenu extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             month: '',
         };
@@ -21,7 +21,9 @@ class MainMenu extends Component {
                     <Nav.Link href="#outcomes">Outcomes</Nav.Link>
                     <Nav.Link href="#balance">Balance</Nav.Link>
                 </Nav>
-                <MonthForm />
+                <MonthForm 
+                    setMonth = { this.props.setMonth }
+                />
             </Navbar>
         )
     };

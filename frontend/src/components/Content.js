@@ -5,14 +5,23 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 class Content extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            month: '',
+        };
+    };
 
-            ///<Container>
-            ///</Container>
     render() {
+        console.log( 'Content:', this.props.month );
         return (
               <Row>
                 <Col lg={2}><EntryMenu /></Col>
-                <Col lg={9}><Entry /></Col>
+                <Col lg={9}>
+                    <Entry 
+                        month = { this.props.month }
+                    />
+                </Col>
               </Row>
         );
     }

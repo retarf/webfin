@@ -5,8 +5,8 @@ import { Modal, Form, Button } from 'react-bootstrap';
 
 class EntryForm extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             name: '',
             description: '',

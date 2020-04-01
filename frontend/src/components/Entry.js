@@ -7,20 +7,27 @@ import MonthForm from './MonthForm.js';
 
 class Entry extends Component { 
 
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             list: [],
             month: '',
-        }
+        };
+
+        this.getData.bind(this);
+        this.addEntry.bind(this);
+        this.setMonth.bind(this);
     };
 
-    componentDidMount() { 
+    componentDidMount() {
+        this.getData();
     };
 
-    getData = month => {
+    getData() {
+        let month = this.props.month;
         let baseUrl = '/budget/entries.json';
         let url = '';
+
         if (month === '') {
             url = baseUrl;
         } 
@@ -37,19 +44,19 @@ class Entry extends Component {
         });
     };
 
-    addEntry = newEntry => {
+    addEntry(newEntry) {
         let { list } = this.state;
         list.push(newEntry);
         this.setState({ list: list });
     };
 
-    setMonth = month => {
-        this.getData(month);
-        this.setState({ month: month });
+    setMonth() {
+        this.getData();
+        this.setState({ month: this.props.month });
     };
 
-//                <MonthForm setMonth = { this.setMonth } />
     render() {
+        console.log('Entry ', this.state.month);
         return (
             <Jumbotron fluid>
                 <Container>
