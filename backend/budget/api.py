@@ -1,8 +1,12 @@
+import datetime
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 
 from .models import Entry
 from .serializers import EntrySerializer
+
+FORMAT = '%Y-%m-%d'
 
 class EntryViewSet(viewsets.ModelViewSet):
 
@@ -11,7 +15,10 @@ class EntryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         month = self.request.query_params.get('month', None)
-        month += '-01'
+        if month is None:
+            now = datetime.datetime.now().strftime(FORMAT)
+        else:
+            month += '-01'
 
         return Entry.objects.filter(month=month)
 
