@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
 import Footer from './Footer.js';
-import { Container, Jumbotron, Row, Col } from 'react-bootstrap';
+import { Jumbotron, Row, Col } from 'react-bootstrap';
 import MainMenu from './MainMenu.js';
 import EntryMenu from './EntryMenu.js';
 import Entry from './Entry.js';
@@ -26,7 +25,6 @@ class Main extends Component {
 
 
     render() {
-        console.log( 'Main:', this.state.month );
         return (
             <div>
                 <MainMenu 
@@ -38,6 +36,9 @@ class Main extends Component {
                             <EntryMenu />
                         </Col>
                         <Col lg={9}>
+                            <h1 className="text-center mt-4 mb-4">
+                                Actual Month: { this.state.month}
+                            </h1>
                             <Entry 
                                 month = { this.state.month }
                             />

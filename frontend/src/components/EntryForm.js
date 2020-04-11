@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Modal, Form, Button } from 'react-bootstrap';
-// import Entries from './Entries.js';
 
 class EntryForm extends Component {
 
@@ -27,12 +25,6 @@ class EntryForm extends Component {
             description: this.state.description,
             value: parseFloat(this.state.value),
         };
-
-        axios.post('/budget/entries.json', entry)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
 
         this.props.addEntry(entry);
         this.resetForm();

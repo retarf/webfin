@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
 import EntryList from './EntryList.js';
 import EntryForm from './EntryForm.js';
-import MonthForm from './MonthForm.js';
 
 class Entry extends Component { 
 
@@ -16,15 +15,25 @@ class Entry extends Component {
 
         this.getData.bind(this);
         this.addEntry.bind(this);
-        this.setMonth.bind(this);
     };
 
     componentDidMount() {
-        this.getData();
+        let month = this.props.month;
+        if (month !== '') {
+            this.getData(month);
+        };
     };
 
-    getData() {
+    componentDidUpdate(prevProps) {
         let month = this.props.month;
+        if (prevProps.month !== month) {
+            this.getData(month);
+            this.setState({ month: month });
+        };
+    };
+
+    getData(newMonth) {
+        let month = newMonth;
         let baseUrl = '/budget/entries.json';
         let url = '';
 
@@ -50,13 +59,7 @@ class Entry extends Component {
         this.setState({ list: list });
     };
 
-    setMonth() {
-        this.getData();
-        this.setState({ month: this.props.month });
-    };
-
     render() {
-        console.log('Entry ', this.state.month);
         return (
             <Jumbotron fluid>
                 <Container>

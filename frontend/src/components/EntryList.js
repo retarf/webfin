@@ -13,7 +13,6 @@ class EntryList extends Component {
     componentDidMount() {
         const data = this.props.entries;
         this.setState({ list: data });
-        console.log('ttt', data);
     };
 
     getSum() {
@@ -26,7 +25,6 @@ class EntryList extends Component {
     };
 
     render() {
-        console.log('lista', this.state.list);
         return (
             <Table striped bordered hover variant="dark">
                 <thead>
