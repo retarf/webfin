@@ -10,6 +10,10 @@ from .serializers import EntrySerializer
 
 FORMAT = '%Y-%m-01'
 
+def log(msg):
+    with open('test.log', 'a') as l:
+        l.write(msg)
+
 def is_month_valid(month):
 
     result = True
@@ -30,7 +34,8 @@ class EntryViewSet(viewsets.ModelViewSet):
         month = self.request.query_params.get('month', None)
 
         if month is None:
-            now = datetime.datetime.now().strftime(FORMAT)
+            month = datetime.datetime.now().strftime(FORMAT)
+            log(month)
         else:
             month_number = month.split('-')[1]
             if not is_month_valid(month_number):
