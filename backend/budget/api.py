@@ -40,7 +40,7 @@ class EntryViewSet(viewsets.ModelViewSet):
         queryset = Entry.objects.filter(month=month)
         serializer = EntrySerializer(queryset, many=True)
 
-        return Response(serializer.data, stauts=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request, format=None):
         request.data['month'] += '-01'
