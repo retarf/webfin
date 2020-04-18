@@ -44,8 +44,9 @@ class EntryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request, format=None):
-        request.data['month'] += '-01'
-        serializer = EntrySerializer(data=request.data)
+        data = request.data.copy()
+        data['month'] += '-01'
+        serializer = EntrySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
 
