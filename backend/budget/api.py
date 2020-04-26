@@ -8,7 +8,7 @@ from .models import Entry
 from .serializers import EntrySerializer
 
 
-FORMAT = '%Y-%m-01'
+FORMAT = '%Y-%m'
 
 
 class EntryViewSet(viewsets.ModelViewSet):
@@ -36,7 +36,6 @@ class EntryViewSet(viewsets.ModelViewSet):
             month_number = month.split('-')[1]
             if not self.is_month_valid(month_number):
                 return Response('Bad request format. Request valid format is RRRR-MM', status=status.HTTP_406_NOT_ACCEPTABLE)
-            month += '-01'
 
         queryset = Entry.objects.filter(month=month)
         serializer = EntrySerializer(queryset, many=True)
@@ -45,10 +44,12 @@ class EntryViewSet(viewsets.ModelViewSet):
 
     def create(self, request, format=None):
         data = request.data.copy()
-        data['month'] += '-01'
-        serializer = EntrySerializer(data=data)
+        if isinstance(data, list):
+            serializer = EntrySerializer(data=data, many=True)
+        else:
+            serializer = EntrySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
 
-        return Response(request.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 

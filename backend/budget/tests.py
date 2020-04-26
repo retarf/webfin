@@ -2,58 +2,81 @@ import datetime
 import collections
 
 from django.test import TestCase
-from budget.api import EntryViewSet
 from rest_framework.test import APIClient
+from rest_framework import status
 
-ENTRY_TEMPLATE = {
-    'id': 1,
-    'month': None,
-    'name': 'test',
-    'entry_creation_date': None,
-    'entry_modification_date': None,
-    'description': 'test description',
-    'value': 10.99,
-}
+from budget.models import Entry
+from budget.api import EntryViewSet
+from budget.serializers import EntrySerializer
+#from budget.tests.handlers import EntryHandler
 
-class EntryViewSetTestCase(TestCase):
 
+class GetEntryTest(TestCase):
     def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_create_several_entries(self):
+        data = [
+            {'name': 'test1', 'month': '2020-04', 'description': 'test1 description', 'value': 99.99},
+            {'name': 'test2', 'month': '2020-04', 'description': 'test2 description', 'value': 66.66},
+        ]
         client = APIClient()
-        entry = self.get_entry(method='POST')
-        client.post('/budget/entries/', entry, format='json')
+        response = client.post('/budget/entries/', data, format='json')
+        entries = Entry.objects.all()
+        serializer = EntrySerializer(entries, many=True)
 
-    def get_entry(self, method='GET'):
-        entry_template = ENTRY_TEMPLATE
-        day_format = '%Y-%m-%d'
-        month_format = '%Y-%m'
-        now = datetime.datetime.now()
-        entry_template['month'] = now.strftime(month_format)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
 
-        if method == 'GET':
-            entry_template['entry_creation_date'] = now.strftime(day_format)
-            entry_template['entry_modification_date'] = now.strftime(day_format)
+    def test_create_single_entry(self):
+        data = {'name': 'test1', 'month': '2020-04', 'description': 'test1 description', 'value': 99.99}
+        client = APIClient()
+        response = client.post('/budget/entries/', data, format='json')
+        entry = Entry.objects.get(id=response.data['id'])
+        serializer = EntrySerializer(entry)
 
-        return entry_template
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
 
-    def test_get_status_code(self):
+    def test_get_all_entries(self):
+        entry1 = Entry.objects.create(
+            month='2020-04',
+            name='test1',
+            description='test1 description',
+            value=10.99
+            )
+
+        entry2 = Entry.objects.create(
+            month='2020-04',
+            name='test2',
+            description='test2 description',
+            value=99.99
+            )
+
+
         client = APIClient()
         response = client.get('/budget/entries/')
-        assert response.status_code == 200
+        entries = [entry1, entry2]
+        serializer = EntrySerializer(entries, many=True)
 
-    def test_get_entries(self):
-        client = APIClient()
-        response = client.get('/budget/entries/')
-        entry = self.get_entry()
-        assert dict(response.data[0]) == entry
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, serializer.data)
 
-    def test_post_status_code(self):
-        client = APIClient()
-        entry = self.get_entry(method='POST')
-        response = client.post('/budget/entries/', entry, format='json')
-        assert response.status_code == 201
+    def test_get_single_entry(self):
+        entry = Entry.objects.create(
+            month='2020-04',
+            name='test1',
+            description='test1 description',
+            value=10.99
+            )
 
-    def test_post_entry(self):
         client = APIClient()
-        entry = self.get_entry(method='POST')
-        response = client.post('/budget/entries/', entry, format='json')
-        assert response.data == entry
+        response = client.get('/budget/entries/{id}/'.format(id=entry.id))
+        serializer = EntrySerializer(entry)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, serializer.data)
+
