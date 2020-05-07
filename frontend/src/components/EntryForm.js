@@ -28,7 +28,6 @@ class EntryForm extends Component {
 
         this.props.addEntry(entry);
         this.resetForm();
-
     };
 
     resetForm = () => {
@@ -37,12 +36,6 @@ class EntryForm extends Component {
 
     render() {
         return (
-            <Modal
-                ///{props}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
                 <Form id="EntryForm" onSubmit={ this.handleSubmit } >
                     <Form.Group >
                         <Form.Label>Name:</Form.Label>
@@ -60,7 +53,6 @@ class EntryForm extends Component {
                         Submit
                     </Button>
                 </Form>
-            </Modal >
         )
     };
 }

@@ -34,7 +34,7 @@ class Entry extends Component {
 
     getData(newMonth) {
         let month = newMonth;
-        let baseUrl = '/budget/entries.json';
+        let baseUrl = '/budget/entries/';
         let url = '';
 
         if (month === '') {
@@ -63,15 +63,9 @@ class Entry extends Component {
         return (
             <Jumbotron fluid>
                 <Container>
-                    <Row>
-                        <Col lg={5}><EntryList 
+                        <EntryList 
                             entries = { this.state.list } 
-                        /></Col>
-                        <Col lg={5}><EntryForm 
-                            addEntry = { this.addEntry } 
-                            month = { this.state.month }
-                        /></Col>
-                    </Row>
+                        />
                 </Container>
             </Jumbotron>
         )};

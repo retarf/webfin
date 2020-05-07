@@ -21,6 +21,8 @@ class MainMenu extends Component {
                     <Nav.Link href="#outcomes">Outcomes</Nav.Link>
                     <Nav.Link href="#balance">Balance</Nav.Link>
                 </Nav>
+                <Navbar.Brand>Actula month:</Navbar.Brand>
+                <Navbar.Brand>2020-03</Navbar.Brand>
                 <MonthForm 
                     setMonth = { this.props.setMonth }
                 />
