@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import EntryList from './EntryList.js';
 import EntryForm from './EntryForm.js';
 
@@ -11,10 +11,11 @@ class Entry extends Component {
         this.state = {
             list: [],
             month: '',
+            showForm: false,
+            formType: null,
         };
 
         this.getData.bind(this);
-        this.addEntry.bind(this);
     };
 
     componentDidMount() {
@@ -53,23 +54,66 @@ class Entry extends Component {
         });
     };
 
-    addEntry(newEntry) {
-        let { list } = this.state;
+    addEntry = (newEntry) => {
+        axios.post('budget/entries/', 
+            { 
+                month: newEntry.month,
+                name: newEntry.name,
+                description: newEntry.description,
+                value: newEntry.value,
+            }
+            )
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                newEntry.id = res.data.id;
+            })
+
+        let list = this.state.list;
         list.push(newEntry);
         this.setState({ list: list });
     };
 
+    showForm = () => {
+        this.setState({
+            formType: "ADD",
+            showForm: true,
+        });
+    };
+
+    closeForm = () => {
+        this.setState({
+            showForm: false,
+        });
+    };
+
     render() {
         return (
-            <Jumbotron fluid>
-                <Container>
-                        <EntryList 
-                            entries = { this.state.list } 
-                        />
-                </Container>
+            <Jumbotron>
+                <h1 className="text-center">
+                    Incomes:
+                </h1>
+                <EntryForm 
+                    month = { this.state.month }
+                    show = { this.state.showForm }
+                    addEntry = { this.addEntry }
+                    onHide = { this.closeForm }
+                    type = { this.state.formType }
+                />
+                <EntryList 
+                    entries = { this.state.list } 
+                />
+                <div className="text-right">
+                    <Button variant="success"
+                        onClick={ this.showForm }
+                    >
+                        Add Entry
+                    </Button>
+                </div>
             </Jumbotron>
         )};
 
 }
 
 export default Entry;
+

@@ -8,6 +8,7 @@ class EntryList extends Component {
         this.state = {
             list: [],
         };
+        this.getSum.bind(this);
     };
 
     componentDidMount() {
