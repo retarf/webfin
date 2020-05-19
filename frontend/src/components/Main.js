@@ -30,6 +30,7 @@ class Main extends Component {
             <Jumbotron fluid>
                 <MainMenu 
                     setMonth = { this.setMonth }
+                    month = { this.state.month }
                 />
                 <Entry 
                     month = { this.state.month }
