@@ -3,6 +3,7 @@ import datetime
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from .models import Entry
 from .serializers import EntrySerializer
@@ -53,3 +54,6 @@ class EntryViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+@api_view(['GET'])
+def get_actual_month(request):
+    return Response(datetime.datetime.now().strftime(FORMAT))
