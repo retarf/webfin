@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import MainMenu from './MainMenu.js';
 import Entry from './Entry.js';
+import axios from 'axios';
 
 class Main extends Component {
 
@@ -22,6 +23,15 @@ class Main extends Component {
 
     getMonth = () => {
         return this.state.month;
+    };
+
+    componentDidMount() {
+        let url = '/budget/actual_month/';
+
+        axios.get(url).then(res => {
+            const actual_month = res.data;
+            this.setState({ month: actual_month });
+        });
     };
 
 
